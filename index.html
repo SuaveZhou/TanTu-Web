@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探途APP - 发现世界的每一个角落</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .cta-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 50px 0;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .primary-button {
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .primary-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .secondary-button {
+            padding: 12px 30px;
+            background-color: transparent;
+            color: #3498db;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        /* 特色功能区域 */
+        .features {
+            padding: 80px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        /* 应用展示区域 */
+        .app-showcase {
+            padding: 80px 0;
+            background-color: #f5f7fa;
+        }
+        
+        .showcase-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .showcase-content {
+            flex: 1;
+        }
+        
+        .showcase-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .showcase-image img {
+            max-width: 80%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .showcase-image video {
+            max-width: 80%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .showcase-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .showcase-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .feature-list {
+            margin-bottom: 30px;
+        }
+        
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #2ecc71;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* 用户评价区域 */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        /* 下载区域 */
+        .download {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .download h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .download p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .app-button {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            color: #333;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .app-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .app-button img {
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ecf0f1;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #34495e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #3498db;
+        }
+        
+        .social-icon {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .showcase-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .showcase-content {
+                margin-bottom: 40px;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">探途APP</div>
+                <ul class="nav-links">
+                    <li><a href="#features">功能</a></li>
+                    <li><a href="#app-showcase">应用展示</a></li>
+                    <li><a href="#testimonials">用户评价</a></li>
+                    <li><a href="#download">下载</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+                <a href="https://pan.baidu.com/s/1Na04c5wpyOkiWrWLUAXsFw?pwd=dbvb" class="cta-button">立即下载</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>探索世界的每一个角落</h1>
+                <p>探途旅行应用让您的旅行更加便捷、智能和有趣。无论是城市漫步还是野外探险，我们都能为您提供最佳的旅行体验。</p>
+                <div class="cta-buttons">
+                    <a href="https://pan.baidu.com/s/1Na04c5wpyOkiWrWLUAXsFw?pwd=dbvb" class="primary-button">立即下载</a>
+                    <a href="#features" class="secondary-button">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色功能区域 -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">为什么选择探途旅行？</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>智能路线规划</h3>
+                    <p>基于AI算法，为您规划最佳旅行路线，考虑交通、景点开放时间和游览时长，让您的旅行更加高效。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏨</div>
+                    <h3>一键查询</h3>
+                    <p>景点门票、天气、电话、营业时间一站式查询，操作简便，为您节省大量时间和精力。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>每日推荐</h3>
+                    <p>通过每日推荐特色景点，使您更好的探索世界，了解景点背后的历史和文化。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>个性化编辑</h3>
+                    <p>支持行程个性化编辑，自动云端同步，还可共同编辑。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用展示区域 -->
+    <section id="app-showcase" class="app-showcase">
+        <div class="container">
+            <div class="showcase-container">
+                <div class="showcase-content">
+                    <h2>智能旅行助手，随时随地</h2>
+                    <p>探途旅行应用集成了多种实用功能，让您的旅行更加轻松愉快。无论是短途自驾还是长途旅行，都能为您提供全方位的支持。</p>
+                    <ul class="feature-list">
+                        <li>实时路况更新，避开拥堵路段</li>
+                        <li>景点信息查询，了解景点历史和文化</li>
+                        <li>天气预警，提前做好准备</li>
+                        <li>交通指南，规划出行时间</li>
+                        <li>导航功能，轻松到达目的地</li>
+                        <li>私人订制，根据喜好定制行程</li>
+                        <li>当地美食推荐，体验地道风味</li>
+                    </ul>
+                    <a href="https://pan.baidu.com/s/1Na04c5wpyOkiWrWLUAXsFw?pwd=dbvb" class="primary-button">立即体验</a>
+                </div>
+                <div class="showcase-image">
+                    <video src="videos/company_intro.mp4" controls autoplay muted loop alt="探途旅行应用界面演示"></video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户评价区域 -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">用户怎么说</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"探途让我的欧洲之行变得如此轻松！智能路线规划功能帮我节省了大量时间，每日推荐让我更深入地了解了每个景点的历史。"</p>
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <img src="images/image1.webp" alt="用户头像">
+                        </div>
+                        <div class="user-name">张先生，自由摄影师</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"作为一个经常独自旅行的人，探途旅行的安全功能给了我很大的安心感。而且社区里的旅行攻略都非常实用，帮我发现了很多小众但美丽的地方。"</p>
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <img src="images/image2.webp" alt="用户头像">
+                        </div>
+                        <div class="user-name">李女士，旅行博主</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"我和家人使用探途旅行已经一年多了，它的离线地图功能在我们去偏远地区旅行时特别有用。一键预订功能也为我们节省了大量比价的时间。"</p>
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <img src="images/image3.webp" alt="用户头像">
+                        </div>
+                        <div class="user-name">王先生，家庭出游爱好者</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区域 -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2>立即开始您的旅行冒险</h2>
+            <p>探途旅行应用现已上线，支持Android平台。下载应用，开启您的智能旅行体验！</p>
+            <div class="app-buttons">
+                <a href="https://pan.baidu.com/s/1Na04c5wpyOkiWrWLUAXsFw?pwd=dbvb" class="app-button">
+                    <img src="images/google_play.png" alt="Google Play图标">
+                    Google Play下载
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>探途旅行</h3>
+                    <p>我们致力于为全球旅行者提供智能、便捷、安全的旅行解决方案，让每一次旅行都成为难忘的体验。</p>
+                </div>
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#features">功能介绍</a></li>
+                        <li><a href="#app-showcase">应用展示</a></li>
+                        <li><a href="#testimonials">用户评价</a></li>
+                        <li><a href="#download">下载应用</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>支持</h3>
+                    <ul>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <div class="social-links">
+                        <a href="#" title="微信"><i class="fab fa-weixin"></i></a>
+                        <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+                        <a href="#" title="抖音"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" title="小红书"><i class="fas fa-book"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 探途旅行 版权所有</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
